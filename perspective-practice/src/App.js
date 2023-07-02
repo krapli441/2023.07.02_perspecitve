@@ -51,6 +51,7 @@ export default function MovingBoxEffect() {
           left: "50%",
           top: "50%",
           transform: `translate(${boxPosition.x}px, ${boxPosition.y}px)`,
+          transition: "transform 0.2s cubic-bezier(.06,.54,.5,.95)",
         }}
       ></div>
     </div>
