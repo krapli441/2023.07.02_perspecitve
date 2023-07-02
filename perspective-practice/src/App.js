@@ -13,8 +13,8 @@ export default function MovingBoxEffect() {
   useEffect(() => {
     const containerSize = containerRef.current.offsetWidth;
     const boxSize = 100;
-    const maxOffset = containerSize / 2 - boxSize / 2;
-    const sensitivity = 0.1;
+    const maxOffset = (containerSize - boxSize) / 2;
+    const sensitivity = 0.05;
 
     const moveBox = () => {
       const offsetX = (mousePosition.x - containerSize / 2) * sensitivity;
@@ -28,7 +28,10 @@ export default function MovingBoxEffect() {
   }, [mousePosition]);
 
   useEffect(() => {
-    setMousePosition({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+    setMousePosition({
+      x: containerRef.current.offsetWidth / 2,
+      y: containerRef.current.offsetHeight / 2,
+    });
   }, []);
 
   return (
@@ -50,7 +53,7 @@ export default function MovingBoxEffect() {
           position: "absolute",
           left: "50%",
           top: "50%",
-          transform: `translate(${boxPosition.x}px, ${boxPosition.y}px)`,
+          transform: `translate(-50%, -50%) translate(${boxPosition.x}px, ${boxPosition.y}px)`,
           transition: "transform 0.2s cubic-bezier(.06,.54,.5,.95)",
         }}
       ></div>
